@@ -1,0 +1,15 @@
+jaffle_shop:
+  target: "{{ env_var('DBT_TARGET', 'local') }}"
+  outputs:
+    local: &bigquery_defaults
+      type: bigquery
+      method: oauth
+      database: "{{ env_var('DBT_BIGQUERY_PROJECT', '') }}"
+      schema: "{{ env_var('DBT_BIGQUERY_DATASET', 'gcp-workflow-example_local') }}"
+      location: "{{ env_var('DBT_BIGQUERY_LOCATION', 'asia-northeast1') }}"
+      threads: 4
+      priority: interactive
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+    staging:
+      <<: *bigquery_defaults

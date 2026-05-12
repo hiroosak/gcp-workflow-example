@@ -1,0 +1,17 @@
+.git
+.terraform
+**/.terraform
+**/.terraform.lock.hcl
+
+logs
+**/logs
+**/target
+**/dbt_packages
+**/dbt_internal_packages
+
+.env
+.DS_Store
+
+# terraform は docker imageに入れない
+deploy/terraform
+docker-compose.yml

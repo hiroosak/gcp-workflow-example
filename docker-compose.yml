@@ -1,0 +1,14 @@
+services:
+  dbt:
+    build:
+      context: .
+    image: gcp-workflow-example/dbt-fusion:local
+    working_dir: /app/jaffle_shop
+    environment:
+      DBT_TARGET: ${DBT_TARGET:-staging}
+      DBT_BIGQUERY_PROJECT: ${DBT_BIGQUERY_PROJECT}
+      DBT_BIGQUERY_DATASET: ${DBT_BIGQUERY_DATASET:-gcp_workflow_example_staging}
+      DBT_BIGQUERY_LOCATION: ${DBT_BIGQUERY_LOCATION:-asia-northeast1}
+    volumes:
+      - ./jaffle_shop:/app/jaffle_shop
+      - ${HOME}/.config/gcloud:/home/dbt/.config/gcloud:ro

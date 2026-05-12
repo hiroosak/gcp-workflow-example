@@ -1,0 +1,27 @@
+name: jaffle_shop
+
+profile: jaffle_shop
+
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+model-paths: ["models"]
+macro-paths: ["macros"]
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  # Builds seeds into '<your_schema_name>_raw'
+  jaffle_shop:
+    +schema: raw
+
+models:
+  # dbt_bigquery_monitoring:
+  #   +schema: "dbt_bigquery_monitoring"
+  jaffle_shop:
+    +static_analysis: strict
+    # Materialize staging models as views, and marts as tables
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

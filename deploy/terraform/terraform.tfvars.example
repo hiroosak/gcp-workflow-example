@@ -1,0 +1,29 @@
+project_id        = "<example project_id>"
+region            = "asia-northeast1"
+bigquery_location = "asia-northeast1"
+environment       = "staging"
+
+dataset_id       = "gcp_workflow_example_staging"
+raw_dataset_id   = "gcp_workflow_example_staging_raw"
+artifact_repo_id = "gcp-workflow-example"
+
+image_name = "dbt-fusion"
+image_tag  = "staging"
+
+scheduler_jobs = {
+  daily_all = {
+    schedule    = "0 9 * * *"
+    time_zone   = "Asia/Tokyo"
+    paused      = false
+    select      = null
+    description = "Daily full dbt build"
+  }
+
+  daily_orders = {
+    schedule    = "30 9 * * *"
+    time_zone   = "Asia/Tokyo"
+    paused      = false
+    select      = "orders+"
+    description = "Daily orders lineage build"
+  }
+}
